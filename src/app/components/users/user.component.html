@@ -1,0 +1,72 @@
+<div class="container" id="main-container" >
+
+  <div class = "mb-4 w-25" *ngIf="isAllVisible">
+    <input type="text" class="form-control " [(ngModel)]="searchText" placeholder="Search by name or username">
+  </div>
+
+
+  <div class="row" *ngIf="isAllVisible && isUsersNotEmpty">
+    <div *ngFor="let user of filteredUsers" class="col-md-6 col-xl-3">
+      <div (click)="handleClick(user.id)" id = "card" class="card shadow mb-4 focus" >
+        <div class="card-body row">
+          <div class="col-12 card-title align-self-center mb-0">
+            <h4 class = "mb-0">{{user?.username}}</h4>
+            <p >{{getRoleName(user.role.role)}}</p>
+            <h6 class = "mb-0">{{user?.firstName}} {{user?.lastName}}</h6>
+            <p class="m-0">{{user?.email}}</p>
+          </div>
+        </div>
+
+        <div class="card-body" >
+          <div class="btn-group-sm" *ngIf="showButtons(user.id)">
+            <button type="button" class="btn btn-dark me-2" (click)="edit(user.id);">Edit</button>
+            <button type="button" class="btn btn-dark me-2" (click)="showStatistics();">Statistics</button>
+            <button type="button" class="btn btn-danger me-2" (click)="deleteSelected(user.id);">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isEditVisible">
+    <h2>Edit user details</h2>
+    <form [formGroup]="editUserForm" (ngSubmit)="saveEdit()">
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="id">ID</label>
+        <input class="form-control"  type="text" formControlName="id" id="id" readonly>
+      </div>
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="role">Role</label>
+        <select class="form-control" formControlName="role" id="role">
+          <option *ngFor="let role of roles" [value]="role.role">{{role.role}}</option>
+        </select>
+      </div>
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="username">Username</label>
+        <input class="form-control"  type="text" formControlName="username" id="username" required>
+      </div>
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="first_name">First name</label>
+        <input class="form-control" type="text" formControlName="first_name" id="first_name" required>
+      </div>
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="last_name">Last name</label>
+        <input class="form-control" type="text" formControlName="last_name" id="last_name" required>
+      </div>
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="email">E-mail</label>
+        <input class="form-control" type="text" formControlName="email" id="email" required>
+      </div>
+      <div class="card-body" >
+        <div class="  btn-group-sm m-2 p-2" >
+          <button type="button" class="btn btn-dark me-2" type="submit" (click) ="saveEdit()">Save changes</button>
+          <button type="button" class="btn btn-secondary me-2" (click)="discardEdit()">Discard</button>
+          <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete user</button>
+
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

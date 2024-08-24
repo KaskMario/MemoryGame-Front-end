@@ -1,0 +1,43 @@
+<div class="m-4 d-flex justify-content-center">
+  <div class="card section-50" style="height: min-content;">
+    <h2 class="text-center mt-3">Register</h2>
+    <form (ngSubmit)="register()">
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="username">Username</label>
+        <input class="form-control" [(ngModel)]="username" type="text" name="username" id="username" required>
+      </div>
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-control" [(ngModel)]="password" type="password" name="password" id="password" required>
+      </div>
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="firstName">First name</label>
+        <input class="form-control" [(ngModel)]="firstName" type="text" name="firstName" id="firstName" required>
+      </div>
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="lastName">Last name</label>
+        <input class="form-control" [(ngModel)]="lastName" type="text" name="lastName" id="lastName" required>
+      </div>
+      <div class="form-group m-2 p-2">
+        <label class="form-label" for="email">E-mail</label>
+        <input class="form-control" [(ngModel)]="email" type="text" name="email" id="email" required>
+      </div>
+
+
+
+      <div class="form-group m-2 p-2">
+        <input type="checkbox" id="adminToggle" [(ngModel)]="isAdminRegistration" name="adminToggle">
+        <label for="adminToggle">Register as Admin</label>
+      </div>
+      <div class="form-group m-2 p-2" *ngIf="isAdminRegistration">
+        <label class="form-label" for="adminKey">Admin Key</label>
+        <input class="form-control" type="text" name="adminKey" id="adminKey" [(ngModel)]="adminKey">
+      </div>
+      <div class="form-group p-2">
+        <button class="m-2 btn btn-dark" type="submit">Register</button>
+        <button class="m-2 form control btn btn-outline-secondary" (click)="goBack()">Back</button>
+      </div>
+    </form>
+  </div>
+</div>
+

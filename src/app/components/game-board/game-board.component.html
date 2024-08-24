@@ -1,0 +1,12 @@
+<div *ngIf="game">
+  <div *ngFor="let card of game.cards" (click)="flipCard(card)">
+    <div [class.flipped]="card.isFlipped">
+      <!-- Show card content here -->
+      {{ card.isFlipped ? card.value : 'Covered' }}
+    </div>
+  </div>
+  <button (click)="endGame()" [disabled]="isSaveGameDisabled()">Save Game</button>
+  <button (click)="changeDifficulty('EASY')">Easy</button>
+  <button (click)="changeDifficulty('MEDIUM')">Medium</button>
+  <button (click)="changeDifficulty('HARD')">Hard</button>
+</div>
